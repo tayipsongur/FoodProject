@@ -1,0 +1,25 @@
+﻿@model FoodProject.Models.Category
+@{
+    ViewData["Title"] = "CategoryGet";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("CategoryUpdate", "Category", FormMethod.Post))
+{
+    @Html.HiddenFor(x=> x.CategoryID)
+
+    @Html.Label("Kategori Adı")
+    @Html.TextBoxFor(x=> x.CategoryName,"",new {@class="form-control" })
+    <br /> 
+    @Html.Label("Durumu")
+    @Html.DropDownListFor(x=> x.Status,(List<SelectListItem>)ViewBag.dgr, new {@class="form-control" } )
+     <br /> 
+    @Html.Label("Kategori Açıklaması")
+    @Html.TextAreaFor(x=> x.CategoryDescription,new{@class="form-control" })
+
+    <br />
+    
+   <button class="btn btn-success"> Güncelle </button>
+
+}
+

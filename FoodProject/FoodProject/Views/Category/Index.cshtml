@@ -1,0 +1,84 @@
+﻿@model List<FoodProject.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+            {
+                <p> Food Name: @Html.TextBox("p","", new { @class = "form-control",placeholder="Kategori Ara" }) </p>
+                <br /> 
+                <input  type="submit" value="Search" class="btn btn-success"/> 
+            }
+<br />
+
+<table class="table table-bordered">
+    <thead style="background-color:#e37b7b; color:black;">
+        <tr>
+
+            <th>  ID </th>
+            <th> Kategori Adı </th>
+            <th> Durumu </th>
+            <th> Kategori Açıklama </th>
+
+            <th> Sil</th>
+            <th> Güncelle </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Where(x => x.Status == true))
+    {
+        <tr>
+            <td>@item.CategoryID </td>
+            <td>@item.CategoryName </td>
+            <td>
+
+                @{
+                    string durum = "";
+                    string renk = "";
+                    if (item.Status == true)
+                    {
+                        durum = "Aktif";
+                        renk = "text-success";
+
+                    }
+                    else
+                    {
+
+                        durum = "Pasif";
+                        renk = "text-danger";
+                    }
+
+
+                }
+
+                <p class="@renk">@durum</p>
+            </td>
+
+            <td>@item.CategoryDescription </td>
+
+            <td>
+                <a class="@(item.Status == true ? "btn btn-danger btn-sm" : "btn btn-success btn-sm") " href="/Category/CategorySil/@item.CategoryID">
+                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    @(item.Status == true ? "Pasif Yap" : "Aktif Yap")
+
+                </a>
+            </td>
+
+            <td>  <a href="/Category/CategoryGet/@item.CategoryID" onclick="btn()" class="btn btn-success btn-sm"><i class="fa-solid fa-arrows-rotate"></i> GÜNCELLE</a> </td>
+        </tr>
+
+                        }
+
+
+</table>
+<div>
+    <a href="/Category/CategoryAdd/" class="btn btn-primary btn-sm"> Yeni Kategori Ekle </a>
+    <a href="/Category/CategoryPassive/" class="btn btn-danger btn-sm"> Pasif Kategorileri Gör </a>
+</div>
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+

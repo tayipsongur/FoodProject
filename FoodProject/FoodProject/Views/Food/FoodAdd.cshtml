@@ -1,0 +1,37 @@
+﻿@model FoodProject.Models.Food
+@{
+    ViewData["Title"] = "FoodAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yiyecek Ekleme Sayfası</h1>
+
+@using (Html.BeginForm("FoodAdd", "Food", FormMethod.Post))
+{
+
+    @Html.Label("Yiyecek Adı")
+    @Html.TextBoxFor(x => x.FoodName, new { @class = "form-control", placeholder = "Yiyecek Adı" })
+    <br />
+    @Html.Label("Fiyat")
+    @Html.TextBoxFor(x => x.Price, new { @class = "form-control", placeholder = "Fiyat" })
+    <br />
+    @Html.Label("Stok Miktarı")
+    @Html.TextBoxFor(x => x.Stock, new { @class = "form-control", placeholder = "Stok Miktarı" })
+    <br />
+    @Html.Label("Resim")
+    @Html.TextBoxFor(x => x.ImageURL, new { @class = "form-control", placeholder = "Resim Yolu" })
+    <br />
+
+    @Html.Label("Kategorisi")
+    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.ktg, new { @class = "form-control" })
+    <br />
+    @Html.Label("Açıklama")
+    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", placeholder = "Açıklama" })
+    <br />
+
+
+    <button class="btn btn-primary"> Ekle</button>
+
+}
+
+
